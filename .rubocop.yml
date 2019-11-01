@@ -1,0 +1,36 @@
+require: rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.5
+  Exclude:
+    - bin/**/*
+    - vendor/**/*
+    - Gemfile
+    - "*.gemspec"
+    - db/schema.rb
+    - db/migrate/*
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+    - lib/tasks/**/*.rake
+    - config/routes.rb
+
+Style/RescueModifier:
+  Exclude:
+    - spec/**/*
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+Naming/PredicateName:
+  NameWhitelist:
+    - is_a?
+    - has_one
+    - has_many
+
+Style/StringLiterals:
+  Enabled: false
