@@ -17,15 +17,27 @@ require 'rails_helper'
 RSpec.describe Import, type: :model do
   describe "associations" do
     it { should have_many(:customers) }
+  end
 
-    describe 'validations' do
-      it { is_expected.to validate_inclusion_of(:status).in_array(%w[created started completed]).allow_nil }
+  it { expect(subject.csv).to be_an_instance_of(ActiveStorage::Attached::One)}
+
+  describe "attachments" do
+    subject(:import) { build(:import, :with_5_customers) }
+
+    it 'attaches a csv file with 5 customers' do
+      expect(import.csv.attached?).to be_truthy
+      expect(import.csv.filename.to_s).to eq('5_customers.csv')
+      expect(import.csv.content_type).to eq('text/csv')
     end
+  end
 
-    describe 'defaults' do
-      it 'sets status to :created by default' do
-        expect(subject.status).to eq('created')
-      end
+  describe 'validations' do
+    it { is_expected.to validate_inclusion_of(:status).in_array(%w[created started completed]).allow_nil }
+  end
+
+  describe 'defaults' do
+    it 'sets status to :created by default' do
+      expect(subject.status).to eq('created')
     end
   end
 end

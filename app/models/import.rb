@@ -16,6 +16,11 @@ class Import < ApplicationRecord
   STATUSES = %w[created started completed].freeze
 
   has_many :customers
+  has_one_attached :csv
 
   validates :status, inclusion: { in: STATUSES }, allow_nil: true
+
+  # validate do
+  #   errors.add(:base, "ololo")
+  # end
 end

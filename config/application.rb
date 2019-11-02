@@ -6,8 +6,10 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-require 'dotenv'
-Dotenv.overload('.env', '.env.local')
+if (ENV['RAILS_ENV'].in?(%w(development test)))
+  require 'dotenv/load'
+  Dotenv.overload('.env', '.env.local')
+end
 
 module InsuranceCrm
   class Application < Rails::Application

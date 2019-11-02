@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>InsuranceCrm</title>
+    <title>Insurance CRM</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,16 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <%# flash.each do |key, value| %>
+        <%#= content_tag :div, value, class: "alert alert-#{key}" %>
+      <%# end %>
+
+      <div class="mt-3">
+        <%= flash_messages %>
+      </div>
+      <%= yield %>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
   </body>
 </html>
