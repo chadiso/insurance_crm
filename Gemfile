@@ -77,6 +77,7 @@ group :test do
   gem 'factory_bot_rails', '~> 5.0.0'
   gem 'rspec-rails', '~> 3.8.2'
   gem 'rubocop-rspec', '~> 1.31.0'
+  gem 'rspec-sidekiq', '~> 3.0.3'
   gem 'shoulda-matchers', '~> 4.0.1'
   gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
   gem 'timecop'

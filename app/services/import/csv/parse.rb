@@ -5,6 +5,7 @@ class Import::Csv::Parse
 
   def initialize(import)
     raise 'No CSV attached to the import' unless import.csv.attached?
+
     @import = import
   end
 

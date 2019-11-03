@@ -212,6 +212,9 @@ GEM
       rspec-expectations (~> 3.8.0)
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
+    rspec-sidekiq (3.0.3)
+      rspec-core (~> 3.0, >= 3.0.0)
+      sidekiq (>= 2.4.0)
     rspec-support (3.8.0)
     rubocop (0.63.1)
       jaro_winkler (~> 1.5.1)
@@ -317,6 +320,7 @@ DEPENDENCIES
   redis
   redis-namespace
   rspec-rails (~> 3.8.2)
+  rspec-sidekiq (~> 3.0.3)
   rubocop (~> 0.63.0)
   rubocop-rspec (~> 1.31.0)
   sass-rails (~> 5.0)
