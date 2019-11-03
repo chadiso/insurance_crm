@@ -1,6 +1,5 @@
 class Import
   class Create
-
     attr_reader :csv_file
 
     def initialize(params)

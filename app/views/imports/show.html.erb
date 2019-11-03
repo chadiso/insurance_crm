@@ -2,9 +2,13 @@
 <!--  <img class="card-img-top" src="..." alt="Card image cap">-->
   <div class="card-body">
     <h5 class="card-title">Import #<%= @import.id %></h5>
-    <h6 class="card-subtitle mb-2 text-muted">status: <%= @import.status %></h6>
-    <p class="card-text">customers in total: <%= @import.total_records_count || 0 %></p>
-    <p class="card-text">customers imported: <%= @import.imported_records_count || 0 %></p>
+    <h6 class="card-subtitle mb-2 text-muted">status: <strong><%= @import.status %></strong></h6>
+    <p class="card-text">customers in total:
+      <span class="badge badge-warning"><%= @import.total_records_count || 0 %></span>
+    </p>
+    <p class="card-text">customers imported:
+      <span class="badge badge-success"><%= @import.imported_records_count || 0 %></span>
+    </p>
     <a href="" class="btn btn-primary" onclick="javascript:window.location.reload(true)">Refresh</a>
   </div>
 </div>

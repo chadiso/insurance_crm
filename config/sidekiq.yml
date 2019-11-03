@@ -1,0 +1,7 @@
+---
+:concurrency: <%= ENV['SIDEKIQ_CONCURRENCY'] || '20' %>
+:logfile: ./log/sidekiq.log
+:queues:
+  - [import_customers, 8]
+  - [imports, 1]
+  - [default, 1]

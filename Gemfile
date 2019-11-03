@@ -42,6 +42,15 @@ gem 'sprockets-rails', '~> 3.2.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'redis'
+gem 'redis-namespace'
+gem 'connection_pool'
+gem 'hiredis'
+
+gem 'sidekiq'
+gem 'sidekiq-status'
+gem 'sidekiq-batch'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry-remote'
