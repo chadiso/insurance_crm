@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   require "sidekiq/web"
   mount Sidekiq::Web, at: "/sidekiq"
 
-  resources :imports, only: %i[new create show index]
+  resources :imports, only: %i[new create show index destroy]
 
-  root 'imports#new'
+  root 'imports#index'
 end

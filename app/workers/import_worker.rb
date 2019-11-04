@@ -10,7 +10,7 @@ class ImportWorker
       return
     end
 
-    import.update_attribute(:status, 'started')
+    import.update_columns(status: 'started', started_at: Time.now)
 
     values = Import::Csv::Parse.new(import).call
 
@@ -41,7 +41,7 @@ class ImportWorker
 
     def call(options)
       import_id = options.symbolize_keys[:import_id]
-      Import.where(id: import_id).update_all(status: 'completed')
+      Import.where(id: import_id).update_all(status: 'completed', completed_at: Time.now)
       puts "All done. Import ##{import_id} completed!"
     end
   end

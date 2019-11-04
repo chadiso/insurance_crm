@@ -1,0 +1,49 @@
+<div class="card" style="width: 100%">
+  <div class="card-body">
+    <h5 class="card-title fa-pull-left">Imports</h5>
+    <a href="<%= new_import_path(Import.new)%>" class="btn btn-primary fa-pull-right mb-4">Create New</a>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Total count</th>
+        <th scope="col">Imported count</th>
+        <th scope="col">Status</th>
+        <th scope="col">Started at</th>
+        <th scope="col">Completed at</th>
+        <th scope="col">Created at</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @imports.each do |import| %>
+        <tr>
+          <th scope="row"><%= import.id %></th>
+          <td><span class="badge badge-pill badge-light"><%= import.total_records_count || 0 %></span></td>
+          <td><span class="badge badge-pill badge-dark"><%= import.imported_records_count || 0 %></span></td>
+          <td><span class="badge badge-warning"><%= import.status %></span></td>
+          <td><%= import.started_at&.to_formatted_s(:long_ordinal) %></td>
+          <td><%= import.completed_at&.to_formatted_s(:long_ordinal) %></td>
+          <td><%= import.created_at&.to_formatted_s(:long_ordinal) %></td>
+          <td><%= link_to 'Delete', import_path(import), method: :delete, onlick: "return confirm('Are you sure you want to delete this item?');", class: 'btn btn-mini btn-danger'%></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <div class="fa-pull-right">
+      <%= will_paginate @imports, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
+  </div>
+</div>
+
+<script>
+    function confrim_delete()
+    {
+        var x = confirm("Are you sure you want to delete?");
+        if (x)
+            return true;
+        else
+            return false;
+    }
+</script>

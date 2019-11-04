@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class ImportsController < ApplicationController
-  before_action :import, only: [:show]
+  before_action :import, only: %i[show destroy]
 
   def new
     @import = Import.new
   end
 
   def index
-    # @todo: add implementation
+    @imports = ::ImportsQuery.new(params).results
   end
 
   def create
-    @import = Import::Create.new(permitted_params).call
+    @import = Import::Create.new(import_permitted_params).call
 
     if @import.valid?
       ImportWorker.perform_async(@import.id)
@@ -23,13 +25,20 @@ class ImportsController < ApplicationController
 
   def show; end
 
+  def destroy
+    @import.csv.purge_later
+    @import.destroy
+
+    redirect_to imports_path
+  end
+
   private
 
   def import
     @import ||= Import.find(params[:id])
   end
 
-  def permitted_params
+  def import_permitted_params
     params.require(:import).permit(:csv)
   end
 end

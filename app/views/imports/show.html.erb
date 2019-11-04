@@ -1,6 +1,10 @@
 <div class="card" style="width: 18rem;">
 <!--  <img class="card-img-top" src="..." alt="Card image cap">-->
   <div class="card-body">
+    <a href="<%= imports_path(Import.new)%>" class="btn btn-secondary btn-sm mb-4">
+      <i class="fa fa-arrow-left"></i>
+      Imports list
+    </a>
     <h5 class="card-title">Import #<%= @import.id %></h5>
     <h6 class="card-subtitle mb-2 text-muted">status: <strong><%= @import.status %></strong></h6>
     <p class="card-text">customers in total:
