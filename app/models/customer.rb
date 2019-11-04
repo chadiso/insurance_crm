@@ -13,6 +13,7 @@
 #
 # Indexes
 #
+#  index_customers_on_email      (email) UNIQUE
 #  index_customers_on_import_id  (import_id)
 #
 
@@ -23,6 +24,7 @@ class Customer < ApplicationRecord
 
   validates :first_name, presence: true, length: { minimum: 2 }
   validates :email, format: { with: EMAIL_REGEXP }
+  validates_uniqueness_of :email
   validate :valid_age
 
   private

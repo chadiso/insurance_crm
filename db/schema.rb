@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_02_120329) do
+ActiveRecord::Schema.define(version: 2019_11_04_141359) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -41,17 +41,19 @@ ActiveRecord::Schema.define(version: 2019_11_02_120329) do
     t.bigint "import_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["import_id"], name: "index_customers_on_import_id"
   end
 
   create_table "imports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "status"
+    t.string "status", default: "created", null: false
     t.datetime "started_at"
     t.datetime "completed_at"
-    t.integer "total_records_count"
-    t.integer "imported_records_count"
+    t.integer "total_records_count", default: 0, null: false
+    t.integer "imported_records_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["status"], name: "index_imports_on_status"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

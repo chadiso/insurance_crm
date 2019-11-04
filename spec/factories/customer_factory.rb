@@ -13,6 +13,7 @@
 #
 # Indexes
 #
+#  index_customers_on_email      (email) UNIQUE
 #  index_customers_on_import_id  (import_id)
 #
 

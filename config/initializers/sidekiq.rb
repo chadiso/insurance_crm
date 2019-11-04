@@ -22,4 +22,16 @@ Sidekiq.configure_server do |config|
   config.client_middleware do |chain|
     chain.add Sidekiq::Status::ClientMiddleware, expiration: 30.minutes
   end
+
+  if Rails.env.development? || Rails.env.test?
+    # config.logger.level = Logger::DEBUG
+    # ActiveRecord::Base.logger = Sidekiq::Logging.logger
+    # # ActiveRecord::Base.logger = Logger.new(STDOUT)
+    # #
+    # #
+
+    config.logger.level = ::Logger::DEBUG
+    Rails.logger = Sidekiq::Logging.logger
+    ActiveRecord::Base.logger = Sidekiq::Logging.logger
+  end
 end

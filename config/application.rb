@@ -6,6 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+ENV['RAILS_ENV'] ||= 'development'
 if (ENV['RAILS_ENV'].in?(%w(development test)))
   require 'dotenv/load'
   Dotenv.overload('.env', '.env.local')

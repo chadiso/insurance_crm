@@ -1,4 +1,6 @@
 class ImportWorker
+  IMPORT_BATCH_SIZE = 250
+
   include Sidekiq::Worker
 
   sidekiq_options queue: 'imports', retry: true, max_retries: 5
@@ -10,17 +12,17 @@ class ImportWorker
       return
     end
 
-    import.update_attribute(:status, 'started')
+    import.update_columns(status: 'started')
 
     values = Import::Csv::Parse.new(import).call
 
-    import.update_column(:total_records_count, values.size)
+    import.update_columns(total_records_count: values.size, imported_records_count: 0)
 
     batch = Sidekiq::Batch.new
     batch.on(:complete, CompleteImportCallback, import_id: import.id)
     batch.jobs do
-      values.each do |customer_data|
-        ::ImportCustomerWorker.perform_async(import.id, customer_data)
+      values.in_groups_of(IMPORT_BATCH_SIZE, false) do |customer_data_chunk|
+        ::ImportCustomersBatchWorker.perform_async(import.id, customer_data_chunk)
       end
     end
   end
