@@ -19,7 +19,7 @@
       <tbody>
       <% @imports.each do |import| %>
         <tr>
-          <th scope="row"><%= import.id %></th>
+          <th scope="row"><%= link_to import.id, import_path(import) %></th>
           <td><span class="badge badge-pill badge-light"><%= import.total_records_count || 0 %></span></td>
           <td><span class="badge badge-pill badge-dark"><%= import.imported_records_count || 0 %></span></td>
           <td><span class="badge badge-warning"><%= import.status %></span></td>
