@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Import
   class Create
     attr_reader :csv_file

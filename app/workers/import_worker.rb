@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ImportWorker
   IMPORT_BATCH_SIZE = 250
 
