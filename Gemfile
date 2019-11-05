@@ -55,6 +55,8 @@ gem 'sidekiq'
 gem 'sidekiq-status'
 gem 'sidekiq-batch'
 
+# Active Storage
+gem 'aws-sdk-s3', require: false
 gem 'activerecord-import', '~> 1.0.3'
 
 group :development, :test do
