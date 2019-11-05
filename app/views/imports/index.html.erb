@@ -26,7 +26,7 @@
           <td><%= import.started_at&.to_formatted_s(:long_ordinal) %></td>
           <td><%= import.completed_at&.to_formatted_s(:long_ordinal) %></td>
           <td><%= import.created_at&.to_formatted_s(:long_ordinal) %></td>
-          <td><%= link_to 'Delete', import_path(import), method: :delete, onlick: "return confirm('Are you sure you want to delete this item?');", class: 'btn btn-mini btn-danger'%></td>
+          <td><%= link_to 'Delete', import_path(import), method: :delete, onclick: "return confirm('Are you sure you want to delete?');", class: 'btn btn-mini btn-danger'%></td>
         </tr>
       <% end %>
       </tbody>
@@ -36,14 +36,3 @@
     </div>
   </div>
 </div>
-
-<script>
-    function confrim_delete()
-    {
-        var x = confirm("Are you sure you want to delete?");
-        if (x)
-            return true;
-        else
-            return false;
-    }
-</script>
