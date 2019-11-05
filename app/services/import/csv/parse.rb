@@ -14,7 +14,7 @@ class Import::Csv::Parse
   def call
     values = []
 
-    CSV.foreach(file_path, headers: true) do |row|
+    parse_enumerator.each do |row|
       values << {
         # @todo: could be refactored to some Mapper
         first_name: row['first_name'],
@@ -29,8 +29,12 @@ class Import::Csv::Parse
 
   private
 
-  def file_path
-    @file_path ||= ActiveStorage::Blob.service.send(:path_for, import.csv.key) # import.csv.download
+  def parse_enumerator
+    if Rails.env.production?
+      CSV.parse(import.csv.download, headers: :first_row)
+    else
+      CSV.foreach(ActiveStorage::Blob.service.send(:path_for, import.csv.key), headers: true)
+    end
   end
 
   def parse_date(str)
