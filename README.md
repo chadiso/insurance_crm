@@ -1,9 +1,6 @@
 # Insurance CRM
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+Demo: https://tranquil-fortress-15837.herokuapp.com
 
 ## Ruby version
 `2.5.1`
