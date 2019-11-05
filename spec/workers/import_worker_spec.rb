@@ -45,7 +45,7 @@ describe ImportWorker, type: :worker do
     let!(:import) { create(:import, :with_5_customers) }
 
     it 'uses CSV parser' do
-      allow(ImportCustomerWorker).to receive(:perform_async)
+      allow(ImportCustomersBatchWorker).to receive(:perform_async)
 
       allow(Import::Csv::Parse).to receive(:new).with(import).and_call_original
 
@@ -55,11 +55,11 @@ describe ImportWorker, type: :worker do
     end
 
     it 'delegates row processing to the ImportCustomerWorker' do
-      allow(ImportCustomerWorker).to receive(:perform_async)
+      allow(ImportCustomersBatchWorker).to receive(:perform_async)
 
       described_class.perform_async(import.id)
 
-      expect(ImportCustomerWorker).to have_received(:perform_async).exactly(5).times
+      expect(ImportCustomersBatchWorker).to have_received(:perform_async).once
     end
 
     context 'when CSV parser called with some stubbed data' do
@@ -72,11 +72,11 @@ describe ImportWorker, type: :worker do
       end
 
       it 'delegates row processing to the ImportCustomerWorker with the same values' do
-        allow(ImportCustomerWorker).to receive(:perform_async)
+        allow(ImportCustomersBatchWorker).to receive(:perform_async)
 
         described_class.perform_async(import.id)
 
-        expect(ImportCustomerWorker).to have_received(:perform_async).with(import.id, first_name: 'ololo').once
+        expect(ImportCustomersBatchWorker).to have_received(:perform_async).with(import.id, [{first_name: 'ololo'}]).once
       end
     end
   end
