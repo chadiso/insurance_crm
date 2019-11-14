@@ -25,10 +25,8 @@ class ImportCustomersBatchWorker
 
     # upd counter in the imports table
     imported_records_count = customers_data.size - result.failed_instances.size
-    Import.transaction do
-      import.with_lock do
-        import.increment!(:imported_records_count, imported_records_count)
-      end
+    import.with_lock do
+      import.increment!(:imported_records_count, imported_records_count)
     end
   end
 end
