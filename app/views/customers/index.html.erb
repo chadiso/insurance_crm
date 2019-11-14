@@ -1,0 +1,36 @@
+<div class="card" style="width: 100%">
+  <div class="card-body">
+    <a href="<%= imports_path(Import.new)%>" class="btn btn-secondary btn-sm mb-4">
+      <i class="fa fa-arrow-left"></i>
+      back to the imports
+    </a>
+    <h5 class="card-title">Customers imported</h5>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Born in</th>
+        <th scope="col">Imported by</th>
+        <th scope="col">Created at</th>
+        <th scope="col">Updated at</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @customers.each do |customer| %>
+        <tr>
+          <td><%= customer.first_name %> <%= customer.last_name %></td>
+          <td><%= mail_to customer.email, customer.email %></td>
+          <td><%= customer.dob&.to_formatted_s(:long_ordinal) %></td>
+          <td><%= link_to "import ##{customer.import_id}", import_path(customer.import) %></td>
+          <td><%= customer.updated_at&.to_formatted_s(:long_ordinal) %></td>
+          <td><%= customer.created_at&.to_formatted_s(:long_ordinal) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <div class="fa-pull-right">
+      <%= will_paginate @customers, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
+  </div>
+</div>

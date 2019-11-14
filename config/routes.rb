@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: "/sidekiq"
 
   resources :imports, only: %i[new create show index destroy]
+  resources :customers, only: %i[index]
 
   root 'imports#index'
 end

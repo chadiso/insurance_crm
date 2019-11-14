@@ -1,7 +1,11 @@
 <div class="card" style="width: 100%">
   <div class="card-body">
     <h5 class="card-title fa-pull-left">Imports</h5>
-    <a href="<%= new_import_path(Import.new)%>" class="btn btn-primary fa-pull-right mb-4">Create New</a>
+    <a href="<%= customers_path %>" class="btn btn-sm btn-outline-secondary fa-pull-right mt-1">
+      customers list
+      <i class="fa fa-arrow-right"></i>
+    </a>
+    <a href="<%= new_import_path(Import.new)%>" class="btn btn-primary fa-pull-right mb-4 mr-2">Create New</a>
 
     <table class="table table-striped">
       <thead>
